@@ -1,38 +1,40 @@
-<h4>Ecco i tuoi risultati per {{pokemon.name}}</h4>
-<div id="fundamentals">
-    <div id="name"><b>Nome:</b>&nbsp;{{pokemon.name}}</div>
-    <div id="height"><b>Altezza:</b>&nbsp;{{pokemon.height}}</div>
-    <div id="weight"><b>Peso:</b>&nbsp;{{pokemon.weight}}</div>
-</div>
-<div id="sprite">
-    <div id="avatar">
-        <div id="defaultView" *ngIf="default">
-            <img [src]="pokemon.frontDefault" alt="front of sprite of the default view">
-            <img [src]="pokemon.backDefault" alt="back of sprite of the default view">
+<div #containerDetails id="container-details" [appShowDetailsStyle]="pokemon !== undefined">
+    <h4>Ecco i tuoi risultati per {{(pokemon) ? pokemon.name : ""}}</h4>
+    <div id="fundamentals">
+        <div id="name"><b>Nome:</b>&nbsp;{{(pokemon) ? pokemon.name : ""}}</div>
+        <div id="height"><b>Altezza:</b>&nbsp;{{(pokemon) ? pokemon.height : ""}}</div>
+        <div id="weight"><b>Peso:</b>&nbsp;{{(pokemon) ? pokemon.weight : ""}}</div>
+    </div>
+    <div id="sprite">
+        <div id="avatar">
+            <div id="defaultView" *ngIf="default">
+                <img [src]="(pokemon) ? pokemon.frontDefault : ''" alt="front of sprite of the default view">
+                <img [src]="(pokemon) ? pokemon.backDefault : ''" alt="back of sprite of the default view">
+            </div>
+            <div id="shinyView" *ngIf="!default">
+                <img [src]="(pokemon) ? pokemon.frontShiny : ''" alt="front of sprite of the shiny view">
+                <img [src]="(pokemon) ? pokemon.backShiny : ''" alt="back of sprite of the shiny view">
+            </div>
         </div>
-        <div id="shinyView" *ngIf="!default">
-            <img [src]="pokemon.frontShiny" alt="front of sprite of the shiny view">
-            <img [src]="pokemon.backShiny" alt="back of sprite of the shiny view">
+        <div id="buttons">
+            <button type="button" class="button-outline" (click)="defaultView()">DEFAULT</button>
+            <button type="button" class="button-outline" (click)="shinyView()">SHINY</button>
+        </div>
+        <div id="stats-container">
+            <h4>Statistiche</h4>
+            <p class="label">hp</p>
+            <progress [value]="(pokemon) ? pokemon.hp : ''" max="100"></progress>
+            <p class="label">attack</p>
+            <progress [value]="(pokemon) ? pokemon.attack : ''" max="100"></progress>
+            <p class="label">defense</p>
+            <progress [value]="(pokemon) ? pokemon.defense : ''" max="100"></progress>
+            <p class="label">special-attack</p>
+            <progress [value]="(pokemon) ? pokemon.specialAttack : ''" max="100"></progress>
+            <p class="label">special-defense</p>
+            <progress [value]="(pokemon) ? pokemon.specialDefense : ''" max="100"></progress>
+            <p class="label">speed</p>
+            <progress [value]="(pokemon) ? pokemon.speed : ''" max="100"></progress>
         </div>
     </div>
-    <div id="buttons">
-        <button type="button" class="button-outline" (click)="defaultView()">DEFAULT</button>
-        <button type="button" class="button-outline" (click)="shinyView()">SHINY</button>
-    </div>
-    <div id="stats-container">
-        <h4>Statistiche</h4>
-        <p class="label">hp</p>
-        <progress [value]="pokemon.hp" max="100"></progress>
-        <p class="label">attack</p>
-        <progress [value]="pokemon.attack" max="100"></progress>
-        <p class="label">defense</p>
-        <progress [value]="pokemon.defense" max="100"></progress>
-        <p class="label">special-attack</p>
-        <progress [value]="pokemon.specialAttack" max="100"></progress>
-        <p class="label">special-defense</p>
-        <progress [value]="pokemon.specialDefense" max="100"></progress>
-        <p class="label">speed</p>
-        <progress [value]="pokemon.speed" max="100"></progress>
-    </div>
+    <button (click)="addInPokedex()">AGGIUNGILO AL POKEDEX</button>
 </div>
-<button (click)="addInPokedex()">AGGIUNGILO AL POKEDEX</button>

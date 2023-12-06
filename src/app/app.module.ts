@@ -13,13 +13,17 @@ import {HttpRequestService} from "./services/httprequest.service";
 import {PokemonSearchedService} from "./services/pokemonsearched.service";
 import {InsertInPokedexService} from "./services/insertinpokedex.service";
 import {ShowPokemonService} from "./services/showpokemon.service";
+import {ShowDetailsConditionService} from "./services/showdetailscondition.service";
+
+import {ShowDetailsStyleDirective} from "./directives/showdetailsstyle.directive";
 
 @NgModule({
   declarations: [
     MainComponent,
     PokemonDetailsComponent,
     PokedexComponent,
-    SearchBarComponent
+    SearchBarComponent,
+    ShowDetailsStyleDirective
   ],
   imports: [
     BrowserModule,
@@ -31,7 +35,8 @@ import {ShowPokemonService} from "./services/showpokemon.service";
     HttpRequestService,
     InsertInPokedexService,
     PokemonSearchedService,
-    ShowPokemonService
+    ShowPokemonService,
+    ShowDetailsConditionService
   ],
   bootstrap: [MainComponent]
 })

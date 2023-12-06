@@ -6,6 +6,7 @@ import {InsertInPokedexService} from "../../services/insertinpokedex.service";
 import {PokemonModel} from "../../models/pokemon.model";
 import {SearchResultModel} from "../../models/searchresult.model";
 import {ShowPokemonService} from "../../services/showpokemon.service";
+import {ShowDetailsConditionService} from "../../services/showdetailscondition.service";
 
 @Component({
   selector: "app-pokemondetails",
@@ -14,23 +15,25 @@ import {ShowPokemonService} from "../../services/showpokemon.service";
 })
 
 export class PokemonDetailsComponent implements OnInit{
-  private _pokemon:PokemonModel;
+  private _pokemon:PokemonModel|undefined;
   private _default:boolean;
   private httprequest:HttpRequestService;
   private pokemonsearched:PokemonSearchedService;
   private insertinpokedex:InsertInPokedexService;
   private showpokemon:ShowPokemonService;
+  private showdetails:ShowDetailsConditionService;
 
   constructor(){
-    this._pokemon = new PokemonModel();
+    this._pokemon = undefined;
     this._default = true;
     this.httprequest = inject(HttpRequestService);
     this.pokemonsearched = inject(PokemonSearchedService);
     this.insertinpokedex = inject(InsertInPokedexService);
     this.showpokemon = inject(ShowPokemonService);
+    this.showdetails = inject(ShowDetailsConditionService);
   }
 
-  public get pokemon():PokemonModel{
+  public get pokemon():PokemonModel|undefined{
     return this._pokemon;
   }
 
@@ -44,6 +47,9 @@ export class PokemonDetailsComponent implements OnInit{
         if(searchresult.url && searchresult.url !== null && searchresult.url !== "" && searchresult.url !== "not_found"){
           this.httprequest.httpGetRequest(searchresult.url).subscribe({
             next: (pokemon:any) => {
+              if(!this._pokemon){
+                this._pokemon = new PokemonModel();
+              }
               for(let i = 0;i < pokemon.stats.length;i++){
                 if(pokemon.stats[i].stat.name === "hp"){
                   this._pokemon.hp = pokemon.stats[i].base_stat;
@@ -71,6 +77,7 @@ export class PokemonDetailsComponent implements OnInit{
               this._pokemon.backShiny = pokemon.sprites.back_shiny;
               this._pokemon.frontDefault = pokemon.sprites.front_default;
               this._pokemon.frontShiny = pokemon.sprites.front_shiny;
+              this.showdetails.setCondition(true);
             },
             error: (error:HttpErrorResponse) => {
               const errorMessage:string = error.statusText + " (" + error.status + ")";
@@ -83,8 +90,11 @@ export class PokemonDetailsComponent implements OnInit{
     this.showpokemon.getPokemon().subscribe({
       next: (nextpokemon:PokemonModel) => {
         this._pokemon = nextpokemon.copy();
+        this.showdetails.setCondition(true);
       }
     });
+    this._pokemon = undefined;
+    this.showdetails.setCondition(false);
   }
 
   public defaultView():void{
@@ -96,7 +106,7 @@ export class PokemonDetailsComponent implements OnInit{
   }
 
   public addInPokedex():void{
-    if(this._pokemon.name !== ""){
+    if(this._pokemon){
       this.insertinpokedex.setNewPokemon(this._pokemon.copy());
     }
   }
