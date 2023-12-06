@@ -1,1 +1,6 @@
-<p>searchbar works!</p>
+<h3>Cerca un pokemon</h3>
+<form #searchForm="ngForm" (ngSubmit)="searchPokemon(searchForm)">
+    <input type="text" placeholder="e.g. bulbasaur" name="pokemonName" id="pokemonName" required ngModel>
+    <button type="submit">CERCA</button>
+</form><br>
+{{message}}<br>

@@ -1,1 +1,9 @@
-<p>pokedex works!</p>
+<h3>Il tuo Pokedex</h3>
+<div id="pokemoninserted">
+    <div class="singlePokemon" *ngFor="let pokemon of pokemonList">
+        {{pokemon.name}}<br>
+        <img [src]="pokemon.frontDefault" alt="sprite of the pokemon"><br>
+        <button type="button" class="button" (click)="seePokemonDetails(pokemon)">MOSTRA</button>
+    </div>
+</div>
+{{message}}

@@ -1,0 +1,13 @@
+#pokemoninserted{
+    display:flex;
+    flex-direction:row;
+}
+
+.singlePokemon{
+    width:max-content;
+    border:2px solid darkslateblue;
+    border-radius:15px;
+    margin-left:2px;
+    margin-right:2px;
+    padding:3px;
+}

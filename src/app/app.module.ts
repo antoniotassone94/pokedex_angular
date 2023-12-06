@@ -10,6 +10,9 @@ import {PokedexComponent} from "./components/pokedex/pokedex.component";
 import {SearchBarComponent} from "./components/searchbar/searchbar.component";
 
 import {HttpRequestService} from "./services/httprequest.service";
+import {PokemonSearchedService} from "./services/pokemonsearched.service";
+import {InsertInPokedexService} from "./services/insertinpokedex.service";
+import {ShowPokemonService} from "./services/showpokemon.service";
 
 @NgModule({
   declarations: [
@@ -25,7 +28,10 @@ import {HttpRequestService} from "./services/httprequest.service";
     HttpClientModule
   ],
   providers: [
-    HttpRequestService
+    HttpRequestService,
+    InsertInPokedexService,
+    PokemonSearchedService,
+    ShowPokemonService
   ],
   bootstrap: [MainComponent]
 })

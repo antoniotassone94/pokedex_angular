@@ -1,6 +1,8 @@
 {
   "name": "pokedex-angular",
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "author": "Antonio Tassone",
+  "description": "applicazione angular basata sul celebre cartone animato per gestire un pokedex.",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -8,6 +10,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
+  "license": "ISC",
   "private": true,
   "dependencies": {
     "@angular/animations": "^17.0.0",
@@ -18,7 +21,6 @@
     "@angular/platform-browser": "^17.0.0",
     "@angular/platform-browser-dynamic": "^17.0.0",
     "@angular/router": "^17.0.0",
-    "milligram": "^1.4.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.2"
