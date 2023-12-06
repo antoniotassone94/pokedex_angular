@@ -1,6 +1,7 @@
 #pokemoninserted{
     display:flex;
     flex-direction:row;
+    overflow:auto;
 }
 
 .singlePokemon{
